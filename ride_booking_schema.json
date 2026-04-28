@@ -5,13 +5,16 @@
       "type": ["string", "null"]
     },
     "email_address": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Customer email. Lowercased. No 'mailto:' prefix and no surrounding angle brackets."
     },
     "phone_number": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Customer phone number in E.164 format when country code is known (e.g. '+14045551234'). Otherwise digits only with no spaces, dashes, or parentheses."
     },
     "date_of_birth": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Customer date of birth in ISO 8601 format YYYY-MM-DD (e.g. '1984-11-29'). Return null if the value is missing, '#ERROR!', a range, or cannot be parsed into a single calendar date."
     },
     "occasion": {
       "type": ["string", "null"],
@@ -32,52 +35,66 @@
         "Wedding",
         "FIFA",
         null
-      ]
+      ],
+      "description": "The occasion for the ride. Must be EXACTLY one of the enum values (case-sensitive). Map common synonyms before defaulting to 'Other': airport pickup/drop or flight -> 'Airport Transfer'; bday -> 'Birthday'; concert/festival/show -> 'Concert/Festival'; film shoot/TV shoot/crew transport -> 'Production'; game/sporting event/match (non-FIFA) -> 'Sports Events'; sightseeing -> 'Tour'; World Cup or FIFA match -> 'FIFA'. Use 'Other' only when an occasion is mentioned but does not match. Use null only when no occasion is mentioned at all."
     },
     "number_of_passengers": {
-      "type": ["integer", "null"]
+      "type": ["integer", "null"],
+      "description": "Total number of passengers as a single integer >= 1. Return null if the value is a range (e.g. '4-6'), a non-numeric description, or not stated."
     },
     "date_of_service": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Date the ride is scheduled for, in ISO 8601 format YYYY-MM-DD (e.g. '2026-04-25'). Return null if the value is missing, '#ERROR!', a date range (e.g. 'May 8th to 10th'), a relative reference that cannot be resolved (e.g. 'next Friday'), or cannot be parsed into a single calendar date."
     },
     "pickup_time": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Pick-up time in 24-hour HH:MM format. Examples: '7:00 PM' -> '19:00', '6:30 AM' -> '06:30', 'noon' -> '12:00', 'midnight' -> '00:00'. Return null if the value is a time range or cannot be parsed into a single time."
     },
     "drop_off_time": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Drop-off / return time in 24-hour HH:MM format. Examples: '2:00 AM' -> '02:00', '11:10 PM' -> '23:10'. Return null if the value is a time range or cannot be parsed into a single time."
     },
     "pickup_address": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Street number and street name ONLY for the pick-up location (e.g. '445 Hopkins Street Southwest'). Do NOT include apartment/suite, city, state, or ZIP — those go in their own fields."
     },
     "apartment_suite": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Apartment number, suite, unit, or building name for the pick-up address (e.g. 'Apt 4B', 'Scout Living'). Null if not present."
     },
     "city": {
       "type": ["string", "null"]
     },
     "state_province": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "State or province of the pick-up address. Use the full name when given that way (e.g. 'Georgia', not 'GA'). Otherwise preserve as written."
     },
     "zip_postal_code": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "ZIP or postal code as a string. Preserve leading zeros (e.g. '03012', not 3012)."
     },
     "destination_address_or_stops": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Destination address or any requested intermediate stops. If multiple stops are listed, join them with ' | ' in the order requested (e.g. 'Stop A | Stop B | Stop C')."
     },
     "final_drop_off_address": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Final drop-off address at the end of the trip. For round trips this is often the same as the pickup address."
     },
     "how_did_you_hear_about_us": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Referral source as written by the customer (e.g. 'Google', 'Instagram', 'Worked with prior'). Null if not present."
     },
     "promo_or_referral_code": {
       "type": ["string", "null"]
     },
     "date_of_form_submission": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Date the form was submitted, in ISO 8601 format YYYY-MM-DD."
     },
     "time_of_form_submission": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Time the form was submitted in 24-hour HH:MM:SS. Append timezone offset when present (e.g. '6:46:51 pm, GMT-0500' -> '18:46:51-05:00')."
     }
   },
   "required": [
