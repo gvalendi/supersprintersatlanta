@@ -1,0 +1,106 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": ["string", "null"]
+    },
+    "email_address": {
+      "type": ["string", "null"]
+    },
+    "phone_number": {
+      "type": ["string", "null"]
+    },
+    "date_of_birth": {
+      "type": ["string", "null"]
+    },
+    "occasion": {
+      "type": ["string", "null"],
+      "enum": [
+        "Airport Transfer",
+        "Birthday",
+        "Casual Outing",
+        "Concert/Festival",
+        "Family Trip",
+        "Funeral",
+        "Graduation",
+        "Nightlife",
+        "Other",
+        "Production",
+        "Prom",
+        "Sports Events",
+        "Tour",
+        "Wedding",
+        "FIFA",
+        null
+      ]
+    },
+    "number_of_passengers": {
+      "type": ["integer", "null"]
+    },
+    "date_of_service": {
+      "type": ["string", "null"]
+    },
+    "pickup_time": {
+      "type": ["string", "null"]
+    },
+    "drop_off_time": {
+      "type": ["string", "null"]
+    },
+    "pickup_address": {
+      "type": ["string", "null"]
+    },
+    "apartment_suite": {
+      "type": ["string", "null"]
+    },
+    "city": {
+      "type": ["string", "null"]
+    },
+    "state_province": {
+      "type": ["string", "null"]
+    },
+    "zip_postal_code": {
+      "type": ["string", "null"]
+    },
+    "destination_address_or_stops": {
+      "type": ["string", "null"]
+    },
+    "final_drop_off_address": {
+      "type": ["string", "null"]
+    },
+    "how_did_you_hear_about_us": {
+      "type": ["string", "null"]
+    },
+    "promo_or_referral_code": {
+      "type": ["string", "null"]
+    },
+    "date_of_form_submission": {
+      "type": ["string", "null"]
+    },
+    "time_of_form_submission": {
+      "type": ["string", "null"]
+    }
+  },
+  "required": [
+    "name",
+    "email_address",
+    "phone_number",
+    "date_of_birth",
+    "occasion",
+    "number_of_passengers",
+    "date_of_service",
+    "pickup_time",
+    "drop_off_time",
+    "pickup_address",
+    "apartment_suite",
+    "city",
+    "state_province",
+    "zip_postal_code",
+    "destination_address_or_stops",
+    "final_drop_off_address",
+    "how_did_you_hear_about_us",
+    "promo_or_referral_code",
+    "date_of_form_submission",
+    "time_of_form_submission"
+  ],
+  "additionalProperties": false
+}
