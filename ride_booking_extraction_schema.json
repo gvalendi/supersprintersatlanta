@@ -1,0 +1,132 @@
+{
+  "name": "ride_booking_extraction",
+  "description": "Extracts structured ride booking / reservation details from a free-form email body. All fields are nullable so the model can return null when a value is not present in the email rather than hallucinating.",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "name",
+      "email_address",
+      "phone_number",
+      "date_of_birth",
+      "occasion",
+      "number_of_passengers",
+      "date_of_service",
+      "pickup_time",
+      "drop_off_time",
+      "pickup_address",
+      "apartment_suite",
+      "city",
+      "state_province",
+      "zip_postal_code",
+      "destination_address_or_stops",
+      "final_drop_off_address",
+      "how_did_you_hear_about_us",
+      "promo_or_referral_code",
+      "date_of_form_submission",
+      "time_of_form_submission"
+    ],
+    "properties": {
+      "name": {
+        "type": ["string", "null"],
+        "description": "Full name of the customer (first and last). Null if not present."
+      },
+      "email_address": {
+        "type": ["string", "null"],
+        "description": "Customer email address. Lowercased, no surrounding angle brackets or 'mailto:' prefix. Null if not present."
+      },
+      "phone_number": {
+        "type": ["string", "null"],
+        "description": "Customer phone number in E.164 format when possible (e.g. '+14045551234'). If country code is unknown, return digits only. Null if not present."
+      },
+      "date_of_birth": {
+        "type": ["string", "null"],
+        "description": "Customer date of birth in ISO 8601 format YYYY-MM-DD. Null if not present, unparseable, or shown as '#ERROR!'."
+      },
+      "occasion": {
+        "type": ["string", "null"],
+        "enum": [
+          "Airport Transfer",
+          "Birthday",
+          "Casual Outing",
+          "Concert/Festival",
+          "Family Trip",
+          "Funeral",
+          "Graduation",
+          "Nightlife",
+          "Other",
+          "Production",
+          "Prom",
+          "Sports Events",
+          "Tour",
+          "Wedding",
+          "FIFA",
+          null
+        ],
+        "description": "The occasion for the ride. Must be EXACTLY one of the allowed values (case-sensitive) or null. Map common synonyms: 'airport pickup/drop' -> 'Airport Transfer', 'bday' -> 'Birthday', 'concert' or 'festival' -> 'Concert/Festival', 'film/tv shoot' or 'crew transport' -> 'Production', 'sporting event/game' -> 'Sports Events', 'sightseeing' -> 'Tour', 'World Cup' or 'FIFA match' -> 'FIFA'. If the email mentions an occasion that does not clearly match any value, use 'Other'. Use null only when no occasion is mentioned at all."
+      },
+      "number_of_passengers": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "description": "Total number of passengers as an integer. Null if not specified."
+      },
+      "date_of_service": {
+        "type": ["string", "null"],
+        "description": "Date the ride is scheduled for, in ISO 8601 format YYYY-MM-DD. Null if not present."
+      },
+      "pickup_time": {
+        "type": ["string", "null"],
+        "description": "Pick-up time in 24-hour HH:MM format (e.g. '19:00' for 7:00 PM). Null if not present."
+      },
+      "drop_off_time": {
+        "type": ["string", "null"],
+        "description": "Drop-off / return time in 24-hour HH:MM format. Null if not present."
+      },
+      "pickup_address": {
+        "type": ["string", "null"],
+        "description": "Street address for pick-up (street number + street name only, no apartment, city, state, or zip). Null if not present."
+      },
+      "apartment_suite": {
+        "type": ["string", "null"],
+        "description": "Apartment number, suite, unit, or building name for the pick-up address. Null if not present."
+      },
+      "city": {
+        "type": ["string", "null"],
+        "description": "City of the pick-up address. Null if not present."
+      },
+      "state_province": {
+        "type": ["string", "null"],
+        "description": "State or province of the pick-up address. Use full name (e.g. 'Georgia') when given that way; otherwise preserve the source. Null if not present."
+      },
+      "zip_postal_code": {
+        "type": ["string", "null"],
+        "description": "ZIP or postal code of the pick-up address as a string (preserve leading zeros). Null if not present."
+      },
+      "destination_address_or_stops": {
+        "type": ["string", "null"],
+        "description": "Destination address or any requested intermediate stops. If multiple stops are listed, join them with ' | ' in the order requested. Null if not present."
+      },
+      "final_drop_off_address": {
+        "type": ["string", "null"],
+        "description": "Final drop-off address (typically the return location at the end of the trip; often the same as the pickup address for round trips). Null if not present."
+      },
+      "how_did_you_hear_about_us": {
+        "type": ["string", "null"],
+        "description": "Source / referral channel as written by the customer (e.g. 'Google', 'Worked with prior', 'Instagram'). Null if not present."
+      },
+      "promo_or_referral_code": {
+        "type": ["string", "null"],
+        "description": "Promo code or referral code provided by the customer. Null if not present."
+      },
+      "date_of_form_submission": {
+        "type": ["string", "null"],
+        "description": "Date the form was submitted, in ISO 8601 format YYYY-MM-DD. Null if not present."
+      },
+      "time_of_form_submission": {
+        "type": ["string", "null"],
+        "description": "Time the form was submitted in 24-hour HH:MM:SS format. Include timezone offset suffix when given (e.g. '18:46:51-05:00'). Null if not present."
+      }
+    }
+  }
+}
